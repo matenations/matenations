@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center hero-sphere">
-      <div className="text-center z-10">
+      <div className="text-center z-10 max-w-4xl mx-auto px-6">
         <motion.h1
-          className="text-6xl md:text-8xl font-light mb-8"
-          style={{ fontWeight: 300, letterSpacing: "-2px" }}
+          className="text-6xl md:text-8xl font-bold mb-8 rounded-full"
+          style={{ fontWeight: 700, letterSpacing: "-2px", fontFamily: 'Inter, sans-serif' }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -14,30 +14,14 @@ export function HeroSection() {
           we're a music society
         </motion.h1>
         
-        <motion.div
-          className="flex items-center justify-center space-x-6 mt-12"
+        <motion.p
+          className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-              <span className="text-black text-xs font-bold">M</span>
-            </div>
-            <span className="text-sm tracking-wider">MATE</span>
-          </div>
-          
-          <div className="w-12 h-6 bg-gray-700 rounded-full p-1 cursor-pointer">
-            <div className="w-4 h-4 bg-white rounded-full transition-transform duration-300"></div>
-          </div>
-          
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 border border-white rounded-full flex items-center justify-center">
-              <span className="text-white text-xs">🎵</span>
-            </div>
-            <span className="text-sm tracking-wider">MUSIC SOCIETY</span>
-          </div>
-        </motion.div>
+          MATE is the world's first music society built for true music seekers, discovering unique sounds across Hip-Hop, Pop, Afrobeats, and Amapiano. We connect music lovers to unforgettable sounds and help artists shine through high-quality promotion and direct pathways to record labels.
+        </motion.p>
       </div>
       
       <motion.div

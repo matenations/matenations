@@ -14,14 +14,19 @@ export default function Home() {
       <div className="fixed inset-0 grain-texture pointer-events-none z-50 opacity-30"></div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-40 p-6">
+      <nav className="fixed top-0 left-0 w-full z-40 p-6 backdrop-blur-md bg-black/20">
         <div className="flex justify-between items-center">
           <LogoSwitch />
           <Button 
             className="bg-white text-black hover:bg-gray-200"
-            data-testid="button-start-project"
+            data-testid="button-submit-demo"
+            onClick={() => {
+              document.getElementById('contact-section')?.scrollIntoView({ 
+                behavior: 'smooth' 
+              });
+            }}
           >
-            Start a project
+            Submit a demo to us
           </Button>
         </div>
       </nav>

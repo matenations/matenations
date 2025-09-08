@@ -53,7 +53,7 @@ export function ContactSection() {
   };
 
   return (
-    <section className="relative py-32 px-6 sphere-gradient">
+    <section id="contact-section" className="relative py-32 px-6 sphere-gradient">
       <div className="max-w-4xl mx-auto text-center">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-light mb-16">Get In Touch</h2>
