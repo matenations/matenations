@@ -1,11 +1,18 @@
 import { ScrollReveal } from "./scroll-reveal";
 import { Card, CardContent } from "@/components/ui/card";
+import avikImage from "@assets/AVIK_1757912854902.jpeg";
+import amritImage from "@assets/Amrit_1757912855008.jpeg";
+import prosperImage from "@assets/prosper_1757912855043.jpeg";
+import abhayImage from "@assets/Abhay_1757912854967.jpeg";
+import toriolaImage from "@assets/Toriola_1757912854935.jpeg";
+import ceoImage from "@assets/ceo_1757912854870.jpeg";
 
 interface TeamMember {
   name: string;
   role: string;
   description: string;
   gradient: string;
+  image?: string;
 }
 
 const teamData = {
@@ -13,20 +20,23 @@ const teamData = {
     {
       name: "AVIK",
       role: "Founder & EDM Producer",
-      description: "Visionary founder driving MATE's mission to revolutionize music discovery and artist development in the electronic music space.",
-      gradient: "from-purple-500 to-pink-500"
+      description: "Visionary founder driving MATE Records' mission to revolutionize music discovery and artist development in the electronic music space.",
+      gradient: "from-purple-500 to-pink-500",
+      image: avikImage
     },
     {
-      name: "Garbuel",
+      name: "Alex Mendez",
       role: "Chief Executive Officer",
-      description: "Strategic leader orchestrating MATE's growth and ensuring operational excellence across all business verticals.",
-      gradient: "from-blue-500 to-cyan-500"
+      description: "Strategic leader orchestrating MATE Records' growth and ensuring operational excellence across all business verticals.",
+      gradient: "from-blue-500 to-cyan-500",
+      image: ceoImage
     },
     {
       name: "Amrit",
       role: "Investor & Sponsorship",
-      description: "Financial strategist and partnership architect securing resources and strategic alliances for MATE's expansion.",
-      gradient: "from-green-500 to-emerald-500"
+      description: "Financial strategist and partnership architect securing resources and strategic alliances for MATE Records' expansion.",
+      gradient: "from-green-500 to-emerald-500",
+      image: amritImage
     }
   ],
   ar: [
@@ -34,7 +44,8 @@ const teamData = {
       name: "Prosper",
       role: "A&R Specialist",
       description: "Hip-Hop and R&B talent scout with keen ear for emerging artists.",
-      gradient: "from-red-500 to-orange-500"
+      gradient: "from-red-500 to-orange-500",
+      image: prosperImage
     },
     {
       name: "Hasan",
@@ -46,13 +57,15 @@ const teamData = {
       name: "Abhay",
       role: "A&R Specialist",
       description: "Pop and electronic music specialist identifying next-gen artists.",
-      gradient: "from-indigo-500 to-purple-500"
+      gradient: "from-indigo-500 to-purple-500",
+      image: abhayImage
     },
     {
       name: "AVIK",
       role: "A&R Lead",
       description: "Electronic and dance music expert guiding artist development.",
-      gradient: "from-purple-500 to-pink-500"
+      gradient: "from-purple-500 to-pink-500",
+      image: avikImage
     }
   ],
   digital: [
@@ -109,6 +122,22 @@ const teamData = {
       gradient: "from-orange-500 to-red-500"
     }
   ],
+  releaseCoordinator: [
+    {
+      name: "Sarah Kim",
+      role: "Release Coordinator",
+      description: "Managing album releases, distribution schedules, and coordinating between artists and streaming platforms.",
+      gradient: "from-cyan-500 to-blue-500"
+    }
+  ],
+  strategist: [
+    {
+      name: "Marcus Chen",
+      role: "Music Strategist",
+      description: "Developing market strategies and analyzing music trends to position our artists for maximum success.",
+      gradient: "from-violet-500 to-indigo-500"
+    }
+  ],
   management: [
     {
       name: "Utsav Poonia",
@@ -119,8 +148,9 @@ const teamData = {
     {
       name: "Toriola",
       role: "Strategist + Manager",
-      description: "Strategic planning specialist and management expert driving MATE's long-term vision and market positioning.",
-      gradient: "from-emerald-500 to-teal-500"
+      description: "Strategic planning specialist and management expert driving MATE Records' long-term vision and market positioning.",
+      gradient: "from-emerald-500 to-teal-500",
+      image: toriolaImage
     }
   ]
 };
@@ -138,10 +168,38 @@ function TeamCard({ member, size = "normal" }: { member: TeamMember; size?: "nor
     large: { name: "text-xl", role: "text-primary", desc: "text-sm" }
   };
 
+  // Create polygonal avatar for members without images
+  const PolygonalAvatar = ({ name, gradient, className }: { name: string; gradient: string; className: string }) => (
+    <div className={`${className} bg-gradient-to-br ${gradient} rounded-full mx-auto mb-4 flex items-center justify-center relative overflow-hidden`}>
+      <div className="absolute inset-0 opacity-30" style={{
+        clipPath: "polygon(30% 0%, 0% 50%, 30% 100%, 70% 100%, 100% 50%, 70% 0%)"
+      }}>
+        <div className="w-full h-full bg-white/20"></div>
+      </div>
+      <span className="text-white font-bold text-lg relative z-10">
+        {name.split(' ').map(n => n[0]).join('').toUpperCase()}
+      </span>
+    </div>
+  );
+
   return (
     <Card className="team-card rounded-xl p-6 text-center hover:scale-105 transition-all duration-300" data-testid={`card-team-${member.name.toLowerCase().replace(/\s+/g, '-')}`}>
       <CardContent className="p-0">
-        <div className={`${sizeClasses[size]} bg-gradient-to-br ${member.gradient} rounded-full mx-auto mb-4`}></div>
+        {member.image ? (
+          <div className={`${sizeClasses[size]} mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br ${member.gradient}`}>
+            <img 
+              src={member.image} 
+              alt={member.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ) : (
+          <PolygonalAvatar 
+            name={member.name}
+            gradient={member.gradient}
+            className={sizeClasses[size]}
+          />
+        )}
         <h4 className={`${textSizes[size].name} font-bold mb-2`}>{member.name}</h4>
         <p className={`${textSizes[size].role} mb-3`}>{member.role}</p>
         <p className={`${textSizes[size].desc} text-muted-foreground`}>{member.description}</p>
@@ -206,6 +264,26 @@ export function TeamSection() {
             <div className="grid md:grid-cols-4 gap-6">
               {teamData.developers.map((member, index) => (
                 <TeamCard key={`${member.name}-dev-${index}`} member={member} size="small" />
+              ))}
+            </div>
+          </div>
+
+          {/* Release Coordinator */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold mb-8 text-center">Release Coordination</h3>
+            <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
+              {teamData.releaseCoordinator.map((member) => (
+                <TeamCard key={member.name} member={member} size="normal" />
+              ))}
+            </div>
+          </div>
+
+          {/* Strategist */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold mb-8 text-center">Strategic Planning</h3>
+            <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
+              {teamData.strategist.map((member) => (
+                <TeamCard key={member.name} member={member} size="normal" />
               ))}
             </div>
           </div>

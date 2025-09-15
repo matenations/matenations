@@ -18,15 +18,17 @@ export default function Home() {
         <div className="flex justify-between items-center">
           <LogoSwitch />
           <Button 
+            asChild
             className="bg-white text-black hover:bg-gray-200"
             data-testid="button-submit-demo"
-            onClick={() => {
-              document.getElementById('contact-section')?.scrollIntoView({ 
-                behavior: 'smooth' 
-              });
-            }}
           >
-            Submit a demo to us
+            <a 
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfxRvor4d6Z53P-3PQBWBzs5YHwicH9F0qzKenRSUBCAGgsVQ/viewform?usp=header" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Submit demo
+            </a>
           </Button>
         </div>
       </nav>
@@ -52,12 +54,12 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-border">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">mate.</h2>
-          <p className="text-muted-foreground mb-6">Connecting music lovers to unforgettable sounds—and artists to the world.</p>
+          <h2 className="text-3xl font-bold mb-4">MATE Records</h2>
+          <p className="text-muted-foreground mb-6">Transforming talented artists into global superstars through innovative music production and worldwide distribution.</p>
           <div className="flex justify-center space-x-8 text-sm text-muted-foreground">
-            <span>© 2024 MATE Music Society</span>
+            <span>© 2024 MATE Records</span>
             <span>•</span>
-            <span>Made with ♫ for music lovers</span>
+            <span>The music of revolution</span>
           </div>
         </div>
       </footer>

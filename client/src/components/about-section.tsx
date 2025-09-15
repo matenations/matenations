@@ -10,13 +10,13 @@ export function AboutSection() {
           </h2>
           <div className="text-lg md:text-xl leading-relaxed text-gray-300 space-y-6">
             <p>
-              <strong>MATE DOT</strong> is the world's first music society built for true music seekers—discovering the most unique songs across Hip-Hop/Rap/R&B, Pop/Dance Pop, Afrobeats/Afro Fusion, and Amapiano.
+              <strong>MATE</strong> is an innovative record label revolutionizing the music industry across Hip-Hop/Rap/R&B, Pop/Dance Pop, Afrobeats/Afro Fusion, and Amapiano genres.
             </p>
             <p>
-              We don't just find great music—we help artists shine. mate. promotes songs across social media through high-quality music videos and curated playlists, offers custom lyrics for free, and provides artists with direct pathways to bigger record labels at only minimal charges.
+              As a full-service record label, we provide comprehensive artist development, professional recording services, global distribution, and strategic marketing campaigns. Our artists benefit from industry expertise, creative support, and direct access to major streaming platforms and media outlets.
             </p>
             <p>
-              At mate., we connect music lovers to unforgettable sounds—and artists to the world.
+              At MATE, we transform talented artists into global superstars through innovative music production, strategic brand development, and worldwide distribution networks.
             </p>
           </div>
         </ScrollReveal>
