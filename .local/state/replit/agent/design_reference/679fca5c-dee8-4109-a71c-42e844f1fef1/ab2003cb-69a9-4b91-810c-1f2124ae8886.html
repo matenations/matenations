@@ -1,0 +1,633 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATE DOT - Music Society</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ["var(--font-sans)"],
+                    serif: ["var(--font-serif)"],
+                    mono: ["var(--font-mono)"],
+                },
+                animation: {
+                    'fade-in': 'fadeIn 0.8s ease-out forwards',
+                    'slide-up': 'slideUp 0.8s ease-out forwards',
+                    'float': 'float 6s ease-in-out infinite',
+                    'grain': 'grain 8s steps(10) infinite',
+                },
+                keyframes: {
+                    fadeIn: {
+                        '0%': { opacity: '0' },
+                        '100%': { opacity: '1' }
+                    },
+                    slideUp: {
+                        '0%': { transform: 'translateY(50px)', opacity: '0' },
+                        '100%': { transform: 'translateY(0)', opacity: '1' }
+                    },
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0px)' },
+                        '50%': { transform: 'translateY(-10px)' }
+                    },
+                    grain: {
+                        '0%, 100%': { transform: 'translate(0, 0)' },
+                        '10%': { transform: 'translate(-5%, -5%)' },
+                        '20%': { transform: 'translate(-10%, 5%)' },
+                        '30%': { transform: 'translate(5%, -10%)' },
+                        '40%': { transform: 'translate(-5%, 15%)' },
+                        '50%': { transform: 'translate(-10%, 5%)' },
+                        '60%': { transform: 'translate(15%, 0%)' },
+                        '70%': { transform: 'translate(0%, 15%)' },
+                        '80%': { transform: 'translate(-15%, 10%)' },
+                        '90%': { transform: 'translate(10%, 5%)' }
+                    }
+                }
+            },
+        },
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@heroicons/react@2.0.0/24/outline/index.js" type="module"></script>
+    
+    <style>
+        :root {
+            --background: hsl(240 10% 4%);
+            --foreground: hsl(0 0% 98%);
+            --card: hsl(240 10% 8%);
+            --card-foreground: hsl(0 0% 95%);
+            --primary: hsl(16 100% 60%);
+            --primary-foreground: hsl(0 0% 98%);
+            --secondary: hsl(240 6% 12%);
+            --secondary-foreground: hsl(0 0% 98%);
+            --muted: hsl(240 5% 15%);
+            --muted-foreground: hsl(240 5% 65%);
+            --accent: hsl(208 90% 60%);
+            --accent-foreground: hsl(0 0% 98%);
+            --border: hsl(240 6% 20%);
+            --input: hsl(240 6% 20%);
+            --ring: hsl(16 100% 60%);
+            --radius: 0.75rem;
+            --font-sans: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Inter', Georgia, serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+        
+        * {
+            border-color: hsl(var(--border));
+        }
+        
+        body {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            font-family: var(--font-sans);
+            line-height: 1.6;
+        }
+        
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #ffffff 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, #ffffff 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grain 8s steps(10) infinite;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-text {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .logo-switch {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .team-card {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .partner-card {
+            transition: all 0.4s ease;
+        }
+        
+        .partner-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+    <div class="grain-overlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 backdrop-blur-md bg-background/80 border-b border-border/50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold">MATE.</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#partners" class="hover:text-primary transition-colors">Partners</a>
+                <a href="#ambassador" class="hover:text-primary transition-colors">Ambassador</a>
+                <a href="#team" class="hover:text-primary transition-colors">Team</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden px-6">
+        <div class="text-center max-w-6xl mx-auto">
+            <h1 class="hero-text text-gradient mb-8 animate-fade-in">
+                we're a music society
+            </h1>
+            <p class="text-xl md:text-2xl text-muted-foreground mb-12 animate-slide-up font-light">
+                हम एक संगीत समाज हैं
+            </p>
+            
+            <!-- Logo Switching Animation -->
+            <div class="logo-switch mb-16 animate-float" onclick="switchLogo()">
+                <div id="logo1" class="transition-all duration-500 ease-in-out">
+                    <div class="text-6xl md:text-8xl font-black mb-4">MATE.</div>
+                    <p class="text-sm text-muted-foreground">Switch between MATE and Music Society</p>
+                </div>
+                <div id="logo2" class="hidden transition-all duration-500 ease-in-out">
+                    <div class="text-6xl md:text-8xl font-black mb-4">MUSIC SOCIETY</div>
+                    <p class="text-sm text-muted-foreground">Switch between MATE and Music Society</p>
+                </div>
+            </div>
+            
+            <div class="animate-bounce">
+                <p class="text-sm uppercase tracking-wider text-muted-foreground mb-2">Scroll</p>
+                <div class="w-px h-16 bg-gradient-to-b from-primary to-transparent mx-auto"></div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+            <h2 class="text-4xl md:text-6xl font-bold text-gradient">Hit the Highlights!</h2>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-32 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-reveal">
+                <h2 class="text-5xl md:text-7xl font-bold mb-16 text-gradient">About MATE.</h2>
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <p class="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
+                            MATE DOT is the world's first music society built for true music seekers—discovering the most unique songs across Hip-Hop/Rap/R&B, Pop/Dance Pop, Afrobeats/Afro Fusion, and Amapiano.
+                        </p>
+                        <p class="text-lg text-muted-foreground mb-8 leading-relaxed">
+                            We don't just find great music—we help artists shine. MATE promotes songs across social media through high-quality music videos and curated playlists, offers custom lyrics for free, and provides artists with direct pathways to bigger record labels at only minimal charges.
+                        </p>
+                        <p class="text-lg text-muted-foreground leading-relaxed">
+                            At MATE, we connect music lovers to unforgettable sounds—and artists to the world.
+                        </p>
+                    </div>
+                    <!-- Music visualization placeholder -->
+                    <div class="bg-card border border-border rounded-xl p-8 flex items-center justify-center h-96">
+                        <div class="text-center">
+                            <svg class="w-24 h-24 mx-auto mb-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/>
+                            </svg>
+                            <p class="text-muted-foreground">Music Visualization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Community Section -->
+    <section id="partners" class="py-32 px-6 bg-card/30">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-reveal">
+                <h2 class="text-5xl md:text-7xl font-bold mb-16 text-gradient">Our Partner Community</h2>
+                <div class="partner-card bg-card border border-border rounded-xl p-12 hover:bg-card/80 transition-all duration-300">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-4">Unison Music App</h3>
+                            <p class="text-xl text-muted-foreground mb-6">Make music together. Let your unfinished tracks grow.</p>
+                            <p class="text-lg text-muted-foreground leading-relaxed mb-6">
+                                Unison revolutionizes music collaboration by allowing artists to post unfinished songs and let musicians worldwide contribute their ideas. With seamless stitching, automated stems, and live collaboration features, it's the ultimate platform for creative connection.
+                            </p>
+                            <a href="https://unisonmusicapp.com/" target="_blank" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                                Visit Unison Music App
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="hidden md:block">
+                            <!-- Unison logo placeholder -->
+                            <div class="w-32 h-32 bg-primary/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-16 h-16 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-background/50 rounded-lg p-6">
+                            <h4 class="font-semibold mb-2">Collaborate Live</h4>
+                            <p class="text-sm text-muted-foreground">Post unfinished songs and get worldwide contributions</p>
+                        </div>
+                        <div class="bg-background/50 rounded-lg p-6">
+                            <h4 class="font-semibold mb-2">Seamless Stitching</h4>
+                            <p class="text-sm text-muted-foreground">Join pieces, layer stems, and connect tracks</p>
+                        </div>
+                        <div class="bg-background/50 rounded-lg p-6">
+                            <h4 class="font-semibold mb-2">Automate Stems</h4>
+                            <p class="text-sm text-muted-foreground">Create stems with one click for easy collaboration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Ambassador Section -->
+    <section id="ambassador" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="section-reveal">
+                <h2 class="text-5xl md:text-7xl font-bold mb-16 text-gradient">Our Brand Ambassador</h2>
+                <div class="bg-card border border-border rounded-xl p-12">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <!-- Sam Noton music producer photo placeholder -->
+                            <div class="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-24 h-24 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-4xl font-bold mb-4">Sam Noton</h3>
+                            <p class="text-xl text-primary mb-6">Music Producer & MATE Brand Ambassador</p>
+                            <p class="text-lg text-muted-foreground mb-8 leading-relaxed">
+                                Sam Noton is a visionary music producer who embodies the spirit of MATE. Known for his innovative approach to electronic music production and his commitment to discovering unique sounds, Sam represents everything MATE stands for - pushing boundaries and connecting artists with their audience.
+                            </p>
+                            <p class="text-lg text-muted-foreground mb-8 leading-relaxed">
+                                As our brand ambassador, Sam helps identify emerging talent and guides artists through their creative journey, ensuring they get the recognition they deserve in the competitive music industry.
+                            </p>
+                            <a href="https://www.instagram.com/samnotonmusic/" target="_blank" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                                Follow Sam on Instagram
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-32 px-6 bg-card/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="section-reveal">
+                <h2 class="text-5xl md:text-7xl font-bold mb-16 text-gradient">Our Team</h2>
+                
+                <!-- Leadership Team -->
+                <div class="mb-20">
+                    <h3 class="text-3xl font-bold mb-12 text-center">Leadership</h3>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="team-card bg-card border border-border rounded-xl p-8 text-center">
+                            <div class="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                <span class="text-2xl font-bold">A</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">AVIK</h4>
+                            <p class="text-primary mb-4">Founder & EDM Producer</p>
+                            <p class="text-sm text-muted-foreground">Visionary founder and talented EDM producer who established MATE to revolutionize music discovery. Also serves in our A&R team, bringing artistic vision to every decision.</p>
+                        </div>
+                        <div class="team-card bg-card border border-border rounded-xl p-8 text-center">
+                            <div class="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                <span class="text-2xl font-bold">G</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Gabriel</h4>
+                            <p class="text-primary mb-4">Chief Executive Officer</p>
+                            <p class="text-sm text-muted-foreground">Strategic leader driving MATE's mission forward. Gabriel ensures operational excellence while maintaining our commitment to artist development and music innovation.</p>
+                        </div>
+                        <div class="team-card bg-card border border-border rounded-xl p-8 text-center">
+                            <div class="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                <span class="text-2xl font-bold">A</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Amrit</h4>
+                            <p class="text-primary mb-4">Investor & Sponsorship</p>
+                            <p class="text-sm text-muted-foreground">Key investor and sponsorship specialist who secures partnerships and funding opportunities. Amrit's business acumen helps MATE grow while supporting emerging artists.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- A&R Team -->
+                <div class="mb-20">
+                    <h3 class="text-3xl font-bold mb-12 text-center">A&R Team</h3>
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="team-card bg-card border border-border rounded-xl p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-lg font-bold">P</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Prosper</h4>
+                            <p class="text-sm text-muted-foreground">Talent scout with an ear for breakthrough artists and trending sounds.</p>
+                        </div>
+                        <div class="team-card bg-card border border-border rounded-xl p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-lg font-bold">H</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Hasan</h4>
+                            <p class="text-sm text-muted-foreground">Music curator specializing in Hip-Hop and R&B discovery.</p>
+                        </div>
+                        <div class="team-card bg-card border border-border rounded-xl p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-lg font-bold">A</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Abhay</h4>
+                            <p class="text-sm text-muted-foreground">A&R specialist focused on Afrobeats and Amapiano genres.</p>
+                        </div>
+                        <div class="team-card bg-card border border-border rounded-xl p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-lg font-bold">A</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">AVIK</h4>
+                            <p class="text-sm text-muted-foreground">Founder bringing producer expertise to artist development.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Creative Teams -->
+                <div class="grid md:grid-cols-2 gap-16 mb-20">
+                    <!-- Digital Art Team -->
+                    <div>
+                        <h3 class="text-3xl font-bold mb-8 text-center">Digital Art Team</h3>
+                        <div class="space-y-6">
+                            <div class="team-card bg-card border border-border rounded-xl p-6 flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
+                                    <span class="text-lg font-bold">S</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold">Stefflen</h4>
+                                    <p class="text-primary text-sm">Head of Digital Art</p>
+                                    <p class="text-sm text-muted-foreground">Creative director overseeing all visual content and brand aesthetics for MATE artists.</p>
+                                </div>
+                            </div>
+                            <div class="team-card bg-card border border-border rounded-xl p-6 flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
+                                    <span class="text-lg font-bold">B</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold">Bernard</h4>
+                                    <p class="text-primary text-sm">Junior Digital Artist</p>
+                                    <p class="text-sm text-muted-foreground">Talented junior artist creating compelling visuals and promotional materials.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Editing Team -->
+                    <div>
+                        <h3 class="text-3xl font-bold mb-8 text-center">Video Editing Team</h3>
+                        <div class="space-y-6">
+                            <div class="team-card bg-card border border-border rounded-xl p-6 flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
+                                    <span class="text-lg font-bold">J</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold">Joel Obais</h4>
+                                    <p class="text-primary text-sm">Head of Video Editing</p>
+                                    <p class="text-sm text-muted-foreground">Expert video editor crafting high-quality music videos that elevate artist narratives.</p>
+                                </div>
+                            </div>
+                            <div class="team-card bg-card border border-border rounded-xl p-6 flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
+                                    <span class="text-lg font-bold">T</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold">Talha</h4>
+                                    <p class="text-primary text-sm">Junior Video Editor</p>
+                                    <p class="text-sm text-muted-foreground">Skilled junior editor supporting video production and content creation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Management Team -->
+                <div>
+                    <h3 class="text-3xl font-bold mb-12 text-center">Management</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="team-card bg-card border border-border rounded-xl p-8 text-center">
+                            <div class="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                <span class="text-2xl font-bold">U</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Utsav Poonia</h4>
+                            <p class="text-primary mb-4">Manager</p>
+                            <p class="text-sm text-muted-foreground">Experienced manager coordinating operations and ensuring smooth workflow across all MATE departments and artist relations.</p>
+                        </div>
+                        <div class="team-card bg-card border border-border rounded-xl p-8 text-center">
+                            <div class="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                <span class="text-2xl font-bold">T</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Toriola</h4>
+                            <p class="text-primary mb-4">Strategist & Manager</p>
+                            <p class="text-sm text-muted-foreground">Strategic planner and manager developing long-term growth strategies while overseeing day-to-day operations and artist development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="section-reveal text-center">
+                <h2 class="text-5xl md:text-7xl font-bold mb-16 text-gradient">Contact Us</h2>
+                <p class="text-xl text-muted-foreground mb-12">
+                    Ready to join the MATE community or collaborate with us? Get in touch and let's create something extraordinary together.
+                </p>
+                
+                <form class="bg-card border border-border rounded-xl p-12" data-implementation="Form should submit to matenations@gmail.com">
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <label for="name" class="block text-sm font-medium mb-3">Name</label>
+                            <input type="text" id="name" name="name" class="w-full bg-input border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors" placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-3">Email</label>
+                            <input type="email" id="email" name="email" class="w-full bg-input border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors" placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    <div class="mb-8">
+                        <label for="subject" class="block text-sm font-medium mb-3">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full bg-input border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors" placeholder="What's this about?">
+                    </div>
+                    <div class="mb-8">
+                        <label for="message" class="block text-sm font-medium mb-3">Message</label>
+                        <textarea id="message" name="message" rows="6" class="w-full bg-input border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none" placeholder="Tell us about your project, collaboration idea, or how we can help..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 px-8 rounded-lg transition-colors">
+                        Send Message to MATE
+                    </button>
+                    <p class="text-sm text-muted-foreground mt-4">
+                        Messages sent to: matenations@gmail.com
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-6 border-t border-border/50">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="text-4xl font-bold mb-4">MATE.</div>
+            <p class="text-muted-foreground mb-8">Connecting music lovers to unforgettable sounds—and artists to the world.</p>
+            <div class="flex justify-center space-x-8 text-sm text-muted-foreground">
+                <span>© 2024 MATE DOT</span>
+                <span>•</span>
+                <span>Music Society</span>
+                <span>•</span>
+                <span>matenations@gmail.com</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Logo switching functionality
+        function switchLogo() {
+            const logo1 = document.getElementById('logo1');
+            const logo2 = document.getElementById('logo2');
+            
+            if (logo1.classList.contains('hidden')) {
+                logo1.classList.remove('hidden');
+                logo2.classList.add('hidden');
+            } else {
+                logo1.classList.add('hidden');
+                logo2.classList.remove('hidden');
+            }
+        }
+
+        // Smooth scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for reveal animations
+        document.querySelectorAll('.section-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler (placeholder)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // TODO: Implement actual email sending to matenations@gmail.com
+            alert('Thank you for your message! We will get back to you soon.');
+        });
+
+        // Auto-switch logo periodically (optional)
+        setInterval(() => {
+            if (Math.random() > 0.7) { // 30% chance every interval
+                switchLogo();
+            }
+        }, 8000);
+    </script>
+</body>
+</html>
