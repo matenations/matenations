@@ -48,12 +48,6 @@ const teamData = {
       image: prosperImage
     },
     {
-      name: "Hasan",
-      role: "A&R Specialist", 
-      description: "Afrobeats and world music curator connecting global sounds.",
-      gradient: "from-yellow-500 to-orange-500"
-    },
-    {
       name: "Abhay",
       role: "A&R Specialist",
       description: "Pop and electronic music specialist identifying next-gen artists.",
@@ -99,32 +93,28 @@ const teamData = {
   developers: [
     {
       name: "AVIK",
-      role: "Lead Developer",
-      description: "Full-stack developer architecting MATE's digital platform and user experience.",
-      gradient: "from-purple-500 to-pink-500"
+      role: "Lead Web Developer",
+      description: "Full-stack web developer architecting MATE's digital platform and user experience.",
+      gradient: "from-purple-500 to-pink-500",
+      image: avikImage
     },
     {
       name: "Amrit",
-      role: "Backend Developer",
-      description: "Systems engineer building robust infrastructure and API services.",
-      gradient: "from-green-500 to-emerald-500"
-    },
-    {
-      name: "Ben",
-      role: "Frontend Developer",
-      description: "UI/UX specialist creating intuitive and engaging user interfaces.",
-      gradient: "from-blue-500 to-indigo-500"
+      role: "Backend Web Developer",
+      description: "Systems engineer building robust web infrastructure and API services.",
+      gradient: "from-green-500 to-emerald-500",
+      image: amritImage
     },
     {
       name: "Rendra",
-      role: "Mobile Developer",
-      description: "Mobile app developer ensuring seamless cross-platform experiences.",
+      role: "Mobile Web Developer",
+      description: "Mobile web developer ensuring seamless cross-platform web experiences.",
       gradient: "from-orange-500 to-red-500"
     }
   ],
   releaseCoordinator: [
     {
-      name: "Sarah Kim",
+      name: "Peter",
       role: "Release Coordinator",
       description: "Managing album releases, distribution schedules, and coordinating between artists and streaming platforms.",
       gradient: "from-cyan-500 to-blue-500"
@@ -132,10 +122,17 @@ const teamData = {
   ],
   strategist: [
     {
-      name: "Marcus Chen",
+      name: "Prajit",
       role: "Music Strategist",
       description: "Developing market strategies and analyzing music trends to position our artists for maximum success.",
       gradient: "from-violet-500 to-indigo-500"
+    },
+    {
+      name: "Toriola",
+      role: "Music Strategist",
+      description: "Strategic planning specialist driving MATE Records' long-term vision and market positioning.",
+      gradient: "from-emerald-500 to-teal-500",
+      image: toriolaImage
     }
   ],
   management: [
@@ -144,13 +141,6 @@ const teamData = {
       role: "Manager",
       description: "Operations manager ensuring seamless execution of projects and maintaining team productivity across all departments.",
       gradient: "from-amber-500 to-orange-500"
-    },
-    {
-      name: "Toriola",
-      role: "Strategist + Manager",
-      description: "Strategic planning specialist and management expert driving MATE Records' long-term vision and market positioning.",
-      gradient: "from-emerald-500 to-teal-500",
-      image: toriolaImage
     }
   ]
 };
@@ -228,7 +218,7 @@ export function TeamSection() {
           {/* A&R Team */}
           <div className="mb-16">
             <h3 className="text-2xl font-semibold mb-8 text-center">A&R Team</h3>
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {teamData.ar.map((member, index) => (
                 <TeamCard key={`${member.name}-${index}`} member={member} size="small" />
               ))}
@@ -261,7 +251,7 @@ export function TeamSection() {
           {/* Developers */}
           <div className="mb-16">
             <h3 className="text-2xl font-semibold mb-8 text-center">Development Team</h3>
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {teamData.developers.map((member, index) => (
                 <TeamCard key={`${member.name}-dev-${index}`} member={member} size="small" />
               ))}
@@ -280,8 +270,8 @@ export function TeamSection() {
 
           {/* Strategist */}
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold mb-8 text-center">Strategic Planning</h3>
-            <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-semibold mb-8 text-center">Strategist</h3>
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {teamData.strategist.map((member) => (
                 <TeamCard key={member.name} member={member} size="normal" />
               ))}
@@ -291,7 +281,7 @@ export function TeamSection() {
           {/* Management */}
           <div>
             <h3 className="text-2xl font-semibold mb-8 text-center">Management</h3>
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
               {teamData.management.map((member) => (
                 <TeamCard key={member.name} member={member} size="normal" />
               ))}
