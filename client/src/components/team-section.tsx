@@ -93,21 +93,21 @@ const teamData = {
   developers: [
     {
       name: "AVIK",
-      role: "Lead Web Developer",
+      role: "Web Developer",
       description: "Full-stack web developer architecting MATE's digital platform and user experience.",
       gradient: "from-purple-500 to-pink-500",
       image: avikImage
     },
     {
       name: "Amrit",
-      role: "Backend Web Developer",
+      role: "Web Developer",
       description: "Systems engineer building robust web infrastructure and API services.",
       gradient: "from-green-500 to-emerald-500",
       image: amritImage
     },
     {
       name: "Rendra",
-      role: "Mobile Web Developer",
+      role: "Web Developer",
       description: "Mobile web developer ensuring seamless cross-platform web experiences.",
       gradient: "from-orange-500 to-red-500"
     }
@@ -123,13 +123,13 @@ const teamData = {
   strategist: [
     {
       name: "Prajit",
-      role: "Music Strategist",
+      role: "Strategist",
       description: "Developing market strategies and analyzing music trends to position our artists for maximum success.",
       gradient: "from-violet-500 to-indigo-500"
     },
     {
       name: "Toriola",
-      role: "Music Strategist",
+      role: "Strategist",
       description: "Strategic planning specialist driving MATE Records' long-term vision and market positioning.",
       gradient: "from-emerald-500 to-teal-500",
       image: toriolaImage
@@ -141,6 +141,13 @@ const teamData = {
       role: "Manager",
       description: "Operations manager ensuring seamless execution of projects and maintaining team productivity across all departments.",
       gradient: "from-amber-500 to-orange-500"
+    },
+    {
+      name: "Toriola",
+      role: "Strategist + Manager",
+      description: "Strategic planning specialist and management expert driving MATE Records' long-term vision and market positioning.",
+      gradient: "from-emerald-500 to-teal-500",
+      image: toriolaImage
     }
   ]
 };
@@ -158,15 +165,28 @@ function TeamCard({ member, size = "normal" }: { member: TeamMember; size?: "nor
     large: { name: "text-xl", role: "text-primary", desc: "text-sm" }
   };
 
-  // Create polygonal avatar for members without images
+  // Create animated polygonal avatar for members without images
   const PolygonalAvatar = ({ name, gradient, className }: { name: string; gradient: string; className: string }) => (
-    <div className={`${className} bg-gradient-to-br ${gradient} rounded-full mx-auto mb-4 flex items-center justify-center relative overflow-hidden`}>
-      <div className="absolute inset-0 opacity-30" style={{
-        clipPath: "polygon(30% 0%, 0% 50%, 30% 100%, 70% 100%, 100% 50%, 70% 0%)"
-      }}>
+    <div className={`${className} bg-gradient-to-br ${gradient} rounded-full mx-auto mb-4 flex items-center justify-center relative overflow-hidden group`}>
+      <div 
+        className="absolute inset-0 opacity-30 transition-all duration-700 group-hover:opacity-50 group-hover:rotate-12" 
+        style={{
+          clipPath: "polygon(30% 0%, 0% 50%, 30% 100%, 70% 100%, 100% 50%, 70% 0%)",
+          animation: "polygonFloat 4s ease-in-out infinite"
+        }}
+      >
         <div className="w-full h-full bg-white/20"></div>
       </div>
-      <span className="text-white font-bold text-lg relative z-10">
+      <div 
+        className="absolute inset-0 opacity-20 transition-all duration-500 group-hover:opacity-40 group-hover:-rotate-6" 
+        style={{
+          clipPath: "polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)",
+          animation: "polygonFloat 3s ease-in-out infinite reverse"
+        }}
+      >
+        <div className="w-full h-full bg-white/30"></div>
+      </div>
+      <span className="text-white font-bold text-lg relative z-10 transition-transform duration-300 group-hover:scale-110">
         {name.split(' ').map(n => n[0]).join('').toUpperCase()}
       </span>
     </div>
@@ -281,7 +301,7 @@ export function TeamSection() {
           {/* Management */}
           <div>
             <h3 className="text-2xl font-semibold mb-8 text-center">Management</h3>
-            <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {teamData.management.map((member) => (
                 <TeamCard key={member.name} member={member} size="normal" />
               ))}
