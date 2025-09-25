@@ -73,7 +73,7 @@ const teamData = {
   ],
   video: [
     {
-      name: "Joel Obais",
+      name: "Daksh Sharma",
       role: "Head of Video Editing",
       description: "Video production maestro crafting compelling music visuals and content.",
       gradient: "from-rose-500 to-pink-500"
@@ -154,28 +154,10 @@ function TeamCard({ member, size = "normal" }: { member: TeamMember; size?: "nor
     large: { name: "text-xl", role: "text-primary", desc: "text-sm" }
   };
 
-  // Create animated polygonal avatar for members without images
+  // Simple circular avatar for members without images
   const PolygonalAvatar = ({ name, gradient, className }: { name: string; gradient: string; className: string }) => (
-    <div className={`${className} bg-gradient-to-br ${gradient} rounded-full mx-auto mb-4 flex items-center justify-center relative overflow-hidden group`}>
-      <div 
-        className="absolute inset-0 opacity-30 transition-all duration-700 group-hover:opacity-50 group-hover:rotate-12" 
-        style={{
-          clipPath: "polygon(30% 0%, 0% 50%, 30% 100%, 70% 100%, 100% 50%, 70% 0%)",
-          animation: "polygonFloat 4s ease-in-out infinite"
-        }}
-      >
-        <div className="w-full h-full bg-white/20"></div>
-      </div>
-      <div 
-        className="absolute inset-0 opacity-20 transition-all duration-500 group-hover:opacity-40 group-hover:-rotate-6" 
-        style={{
-          clipPath: "polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)",
-          animation: "polygonFloat 3s ease-in-out infinite reverse"
-        }}
-      >
-        <div className="w-full h-full bg-white/30"></div>
-      </div>
-      <span className="text-white font-bold text-lg relative z-10 transition-transform duration-300 group-hover:scale-110">
+    <div className={`${className} bg-gradient-to-br ${gradient} rounded-full mx-auto mb-4 flex items-center justify-center`}>
+      <span className="text-white font-bold text-lg">
         {name.split(' ').map(n => n[0]).join('').toUpperCase()}
       </span>
     </div>
