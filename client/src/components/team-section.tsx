@@ -16,6 +16,14 @@ interface TeamMember {
 }
 
 const teamData = {
+  operatingManager: [
+    {
+      name: "Alvin",
+      role: "Director",
+      description: "Experienced leader overseeing daily operations and ensuring organizational efficiency at MATE Records.",
+      gradient: "from-yellow-500 to-orange-500"
+    }
+  ],
   leadership: [
     {
       name: "AVIK",
@@ -41,13 +49,6 @@ const teamData = {
   ],
   ar: [
     {
-      name: "Prosper",
-      role: "A&R Specialist",
-      description: "Hip-Hop and R&B talent scout with keen ear for emerging artists.",
-      gradient: "from-red-500 to-orange-500",
-      image: prosperImage
-    },
-    {
       name: "Abhay",
       role: "A&R Specialist",
       description: "Pop and electronic music specialist identifying next-gen artists.",
@@ -68,12 +69,6 @@ const teamData = {
       role: "Head of Digital Art",
       description: "Creative director leading visual identity and digital artwork creation.",
       gradient: "from-teal-500 to-cyan-500"
-    },
-    {
-      name: "Bernard",
-      role: "Junior Digital Artist",
-      description: "Emerging talent specializing in motion graphics and album artwork.",
-      gradient: "from-lime-500 to-green-500"
     }
   ],
   video: [
@@ -82,12 +77,6 @@ const teamData = {
       role: "Head of Video Editing",
       description: "Video production maestro crafting compelling music visuals and content.",
       gradient: "from-rose-500 to-pink-500"
-    },
-    {
-      name: "Talha",
-      role: "Junior Video Editor",
-      description: "Creative video editor specializing in music video production and social content.",
-      gradient: "from-violet-500 to-purple-500"
     }
   ],
   developers: [
@@ -220,7 +209,7 @@ function TeamCard({ member, size = "normal" }: { member: TeamMember; size?: "nor
 
 export function TeamSection() {
   return (
-    <section className="relative py-32 px-6">
+    <section className="relative py-32 px-6 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Our Team</h2>
@@ -235,12 +224,24 @@ export function TeamSection() {
             </div>
           </div>
 
+          {/* Operating Manager */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold mb-8 text-center">Operating Manager</h3>
+            <div className="flex justify-center">
+              <div className="w-full max-w-2xl">
+                {teamData.operatingManager.map((member) => (
+                  <TeamCard key={member.name} member={member} size="normal" />
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* A&R Team */}
           <div className="mb-16">
             <h3 className="text-2xl font-semibold mb-8 text-center">A&R Team</h3>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
               {teamData.ar.map((member, index) => (
-                <TeamCard key={`${member.name}-${index}`} member={member} size="small" />
+                <TeamCard key={`${member.name}-${index}`} member={member} size="normal" />
               ))}
             </div>
           </div>
@@ -250,9 +251,9 @@ export function TeamSection() {
             {/* Digital Artist Team */}
             <div>
               <h3 className="text-2xl font-semibold mb-8 text-center">Digital Artist Team</h3>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
                 {teamData.digital.map((member) => (
-                  <TeamCard key={member.name} member={member} size="small" />
+                  <TeamCard key={member.name} member={member} size="normal" />
                 ))}
               </div>
             </div>
@@ -260,9 +261,9 @@ export function TeamSection() {
             {/* Video Editing Team */}
             <div>
               <h3 className="text-2xl font-semibold mb-8 text-center">Video Editing Team</h3>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
                 {teamData.video.map((member) => (
-                  <TeamCard key={member.name} member={member} size="small" />
+                  <TeamCard key={member.name} member={member} size="normal" />
                 ))}
               </div>
             </div>

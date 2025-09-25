@@ -1,6 +1,9 @@
 import { ScrollReveal } from "./scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { UnisonLogo } from "./ui/unison-logo";
+import { OfficialUnisonLogo } from "./ui/unison-logo";
+import { UnisonLogoNoShape } from "./ui/unison-logo";
 
 export function PartnerSection() {
   return (
@@ -8,7 +11,7 @@ export function PartnerSection() {
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Partner Community</h2>
-          <Card className="rounded-2xl p-12 text-center bg-card/50 backdrop-blur-sm">
+          <Card className="rounded-2xl p-12 text-center bg-transparent shadow-none">
             <CardContent className="p-0">
               <div className="mb-8">
                 <h3 className="text-3xl font-bold mb-4">Unison Music App</h3>
@@ -25,22 +28,12 @@ export function PartnerSection() {
                     <li>• Automate stems with a single click</li>
                   </ul>
                 </div>
-                
-                <div className="bg-secondary rounded-xl p-6">
-                  <div className="bg-background rounded-lg p-4 mb-4">
-                    <div className="flex items-center space-x-3 mb-3">
-                      <div className="w-10 h-10 bg-primary rounded-full"></div>
-                      <div>
-                        <p className="font-medium">@producer123</p>
-                        <p className="text-sm text-muted-foreground">Looking for: Mixing, Production</p>
-                      </div>
-                    </div>
-                    <div className="bg-muted rounded p-3">
-                      <p className="text-sm">Original Track - Indie Pop</p>
-                      <div className="w-full bg-accent h-2 rounded mt-2"></div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-center text-muted-foreground">Real-time music collaboration platform</p>
+                <div className="flex justify-center items-center h-full">
+                  {/* Community illustration only, even larger, 4:3 ratio */}
+                  <div
+                    className="rounded-2xl overflow-hidden flex items-center justify-center"
+                    style={{ width: 420, height: 315, background: 'url(https://cdn.dribbble.com/userupload/3914102/file/original-5025a045fbda683af63bf5113891a4c7.png?resize=1024x768&vertical=center) center/cover no-repeat' }}
+                  />
                 </div>
               </div>
               
