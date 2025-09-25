@@ -29,10 +29,15 @@ export function PartnerSection() {
                   </ul>
                 </div>
                 <div className="flex justify-center items-center h-full">
-                  {/* Community illustration only, even larger, 4:3 ratio */}
+                  {/* Responsive community illustration, 4:3 ratio */}
                   <div
-                    className="rounded-2xl overflow-hidden flex items-center justify-center"
-                    style={{ width: 420, height: 315, background: 'url(https://cdn.dribbble.com/userupload/3914102/file/original-5025a045fbda683af63bf5113891a4c7.png?resize=1024x768&vertical=center) center/cover no-repeat' }}
+                    className="rounded-2xl overflow-hidden flex items-center justify-center w-full"
+                    style={{
+                      aspectRatio: '4 / 3',
+                      maxWidth: 420,
+                      width: '100%',
+                      background: 'url(https://cdn.dribbble.com/userupload/3914102/file/original-5025a045fbda683af63bf5113891a4c7.png?resize=1024x768&vertical=center) center/cover no-repeat'
+                    }}
                   />
                 </div>
               </div>
