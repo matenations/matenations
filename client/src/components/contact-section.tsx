@@ -12,6 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { AnimatedBackground } from "./animated-background";
 
 export function ContactSection() {
   const { toast } = useToast();
@@ -53,11 +54,11 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact-section" className="relative py-32 px-6 sphere-gradient">
+    <AnimatedBackground intensity="medium" className="py-20 md:py-32 px-4 md:px-6">
       <div className="max-w-4xl mx-auto text-center">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-light mb-16">Get In Touch</h2>
-          <Card className="rounded-2xl p-12 bg-card/50 backdrop-blur-sm">
+          <Card className="rounded-2xl p-6 md:p-12 bg-black/30 backdrop-blur-md border-white/10">
             <CardContent className="p-0">
               <p className="text-xl text-muted-foreground mb-8">Ready to discover unique music or collaborate with us? Let's connect.</p>
               
@@ -169,6 +170,6 @@ export function ContactSection() {
           </Card>
         </ScrollReveal>
       </div>
-    </section>
+    </AnimatedBackground>
   );
 }

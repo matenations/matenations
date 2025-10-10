@@ -4,6 +4,7 @@ import { PartnerSection } from "@/components/partner-section";
 import { AmbassadorSection } from "@/components/ambassador-section";
 import { TeamSection } from "@/components/team-section";
 import { ContactSection } from "@/components/contact-section";
+import { StickyHeader } from "@/components/sticky-header";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -11,6 +12,9 @@ export default function Home() {
     <div className="smooth-scroll">
       {/* Grain Texture Overlay */}
       <div className="fixed inset-0 grain-texture pointer-events-none z-50 opacity-30"></div>
+
+      {/* Sticky Header (appears after scrolling) */}
+      <StickyHeader />
 
       {/* Navigation */}
       <nav className="fixed top-0 right-0 z-40 p-6">
@@ -33,7 +37,9 @@ export default function Home() {
       <HeroSection />
 
       {/* About Section */}
-      <AboutSection />
+      <div id="about">
+        <AboutSection />
+      </div>
 
       {/* Partner Community Section */}
       <PartnerSection />
@@ -42,10 +48,14 @@ export default function Home() {
       <AmbassadorSection />
 
       {/* Team Section */}
-      <TeamSection />
+      <div id="team">
+        <TeamSection />
+      </div>
 
       {/* Contact Section */}
-      <ContactSection />
+      <div id="contact">
+        <ContactSection />
+      </div>
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-border">

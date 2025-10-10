@@ -5,6 +5,7 @@ import amritImage from "@assets/Amrit_1757912855008.jpeg";
 import prosperImage from "@assets/prosper_1757912855043.jpeg";
 import abhayImage from "@assets/Abhay_1757912854967.jpeg";
 import ceoImage from "@assets/ceo_1757912854870.jpeg";
+import { AnimatedBackground } from "./animated-background";
 
 interface TeamMember {
   name: string;
@@ -149,7 +150,7 @@ function TeamCard({ member, size = "normal" }: { member: TeamMember; size?: "nor
   );
 
   return (
-    <Card className="team-card rounded-xl p-6 text-center hover:scale-105 transition-all duration-300" data-testid={`card-team-${member.name.toLowerCase().replace(/\s+/g, '-')}`}>
+    <Card className="team-card rounded-xl p-4 md:p-6 text-center hover:scale-105 transition-all duration-300" data-testid={`card-team-${member.name.toLowerCase().replace(/\s+/g, '-')}`}>
       <CardContent className="p-0">
         {member.image ? (
           <div className={`${sizeClasses[size]} mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br ${member.gradient}`}>
@@ -176,15 +177,15 @@ function TeamCard({ member, size = "normal" }: { member: TeamMember; size?: "nor
 
 export function TeamSection() {
   return (
-    <section className="relative py-32 px-6 bg-transparent">
+    <AnimatedBackground intensity="low" className="py-20 md:py-32 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
-          <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Our Team</h2>
+          <h2 className="text-4xl md:text-5xl font-light text-center mb-16 md:mb-20">Our Team</h2>
           
           {/* Leadership */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold mb-8 text-center">Leadership</h3>
-            <div className="grid md:grid-cols-3 gap-8">
+          <div className="mb-12 md:mb-16">
+            <h3 className="text-xl md:text-2xl font-semibold mb-6 md:mb-8 text-center">Leadership</h3>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
               {teamData.leadership.map((member) => (
                 <TeamCard key={member.name} member={member} size="large" />
               ))}
@@ -277,6 +278,6 @@ export function TeamSection() {
           </div>
         </ScrollReveal>
       </div>
-    </section>
+    </AnimatedBackground>
   );
 }

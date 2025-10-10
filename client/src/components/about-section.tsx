@@ -1,14 +1,15 @@
 import { ScrollReveal } from "./scroll-reveal";
+import { AnimatedBackground } from "./animated-background";
 
 export function AboutSection() {
   return (
-    <section className="relative py-32 px-6 sphere-gradient">
+    <AnimatedBackground intensity="medium" className="py-20 md:py-32 px-4 md:px-6">
       <div className="max-w-4xl mx-auto text-center">
         <ScrollReveal>
-          <h2 className="text-5xl md:text-6xl font-light mb-12" style={{ letterSpacing: "-1px" }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-12" style={{ letterSpacing: "-1px" }}>
             About Mate Nations
           </h2>
-          <div className="text-lg md:text-xl leading-relaxed text-gray-300 space-y-6">
+          <div className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-300 space-y-6">
             <p>
               <strong>Mate Nations</strong> is an innovative record label revolutionizing the music industry. We embrace and celebrate all music genres, welcoming artists from every musical background and style.
             </p>
@@ -21,6 +22,6 @@ export function AboutSection() {
           </div>
         </ScrollReveal>
       </div>
-    </section>
+    </AnimatedBackground>
   );
 }
