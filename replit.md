@@ -1,6 +1,6 @@
 # Overview
 
-MATE DOT is a music society web application focused on discovering and promoting unique music across Hip-Hop/Rap/R&B, Pop/Dance Pop, and Afrobeats/Afro Fusion genres. The platform serves as both a music discovery service and an artist development platform, connecting music lovers with emerging artists while providing promotional services including music videos, curated playlists, and custom lyrics.
+Mate Nations is a music society web application focused on discovering and promoting unique music across all genres. The platform serves as both a music discovery service and an artist development platform, connecting music lovers with emerging artists while providing promotional services including music videos, curated playlists, and custom lyrics.
 
 # User Preferences
 

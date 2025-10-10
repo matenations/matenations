@@ -4,7 +4,6 @@ import avikImage from "@assets/AVIK_1757912854902.jpeg";
 import amritImage from "@assets/Amrit_1757912855008.jpeg";
 import prosperImage from "@assets/prosper_1757912855043.jpeg";
 import abhayImage from "@assets/Abhay_1757912854967.jpeg";
-import toriolaImage from "@assets/Toriola_1757912854935.jpeg";
 import ceoImage from "@assets/ceo_1757912854870.jpeg";
 
 interface TeamMember {
@@ -20,7 +19,7 @@ const teamData = {
     {
       name: "Alvin",
       role: "Director",
-      description: "Experienced leader overseeing daily operations and ensuring organizational efficiency at MATE Records.",
+      description: "Experienced leader overseeing daily operations and ensuring organizational efficiency at Mate Nations.",
       gradient: "from-yellow-500 to-orange-500"
     }
   ],
@@ -28,21 +27,21 @@ const teamData = {
     {
       name: "AVIK",
       role: "Founder & EDM Producer",
-      description: "Visionary founder driving MATE Records' mission to revolutionize music discovery and artist development in the electronic music space.",
+      description: "Visionary founder driving Mate Nations' mission to revolutionize music discovery and artist development in the electronic music space.",
       gradient: "from-purple-500 to-pink-500",
       image: avikImage
     },
     {
       name: "Alex Mendez",
       role: "Chief Executive Officer",
-      description: "Strategic leader orchestrating MATE Records' growth and ensuring operational excellence across all business verticals.",
+      description: "Strategic leader orchestrating Mate Nations' growth and ensuring operational excellence across all business verticals.",
       gradient: "from-blue-500 to-cyan-500",
       image: ceoImage
     },
     {
       name: "Amrit",
       role: "Investor & Sponsorship",
-      description: "Financial strategist and partnership architect securing resources and strategic alliances for MATE Records' expansion.",
+      description: "Financial strategist and partnership architect securing resources and strategic alliances for Mate Nations' expansion.",
       gradient: "from-green-500 to-emerald-500",
       image: amritImage
     }
@@ -73,7 +72,7 @@ const teamData = {
   ],
   video: [
     {
-      name: "Daksh Sharma",
+      name: "Soumyadeep Banik",
       role: "Head of Video Editing",
       description: "Video production maestro crafting compelling music visuals and content.",
       gradient: "from-rose-500 to-pink-500"
@@ -83,7 +82,7 @@ const teamData = {
     {
       name: "AVIK",
       role: "Web Developer",
-      description: "Full-stack web developer architecting MATE's digital platform and user experience.",
+      description: "Full-stack web developer architecting Mate Nations' digital platform and user experience.",
       gradient: "from-purple-500 to-pink-500",
       image: avikImage
     },
@@ -115,13 +114,6 @@ const teamData = {
       role: "Strategist",
       description: "Developing market strategies and analyzing music trends to position our artists for maximum success.",
       gradient: "from-violet-500 to-indigo-500"
-    },
-    {
-      name: "Toriola",
-      role: "Strategist",
-      description: "Strategic planning specialist driving MATE Records' long-term vision and market positioning.",
-      gradient: "from-emerald-500 to-teal-500",
-      image: toriolaImage
     }
   ],
   management: [
@@ -130,13 +122,6 @@ const teamData = {
       role: "Manager",
       description: "Operations manager ensuring seamless execution of projects and maintaining team productivity across all departments.",
       gradient: "from-amber-500 to-orange-500"
-    },
-    {
-      name: "Toriola",
-      role: "Strategist + Manager",
-      description: "Strategic planning specialist and management expert driving MATE Records' long-term vision and market positioning.",
-      gradient: "from-emerald-500 to-teal-500",
-      image: toriolaImage
     }
   ]
 };

@@ -22,7 +22,7 @@ export function AmbassadorSection() {
                 <h3 className="text-2xl font-bold mb-2">Masibulele Pika</h3>
                 <p className="text-lg text-muted-foreground mb-4">Professional DJ & Music Curator</p>
                 <p className="text-sm leading-relaxed text-gray-300">
-                  Masibulele Pika brings cutting-edge DJ skills and deep music knowledge to MATE Records. As a professional DJ, he represents our commitment to discovering and promoting exceptional talent in the electronic and dance music scenes.
+                  Masibulele Pika brings cutting-edge DJ skills and deep music knowledge to Mate Nations. As a professional DJ, he represents our commitment to discovering and promoting exceptional talent in the electronic and dance music scenes.
                 </p>
               </CardContent>
             </Card>
@@ -39,7 +39,7 @@ export function AmbassadorSection() {
                 <h3 className="text-2xl font-bold mb-2">Demetrius Lucas</h3>
                 <p className="text-lg text-muted-foreground mb-4">Award-winning Music Producer</p>
                 <p className="text-sm leading-relaxed text-gray-300">
-                  Demetrius Lucas is an innovative music producer who embodies MATE Records' vision of revolutionary sound. His expertise in modern production techniques and artist development makes him an invaluable ambassador for our record label.
+                  Demetrius Lucas is an innovative music producer who embodies Mate Nations' vision of revolutionary sound. His expertise in modern production techniques and artist development makes him an invaluable ambassador for our record label.
                 </p>
               </CardContent>
             </Card>
