@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { AnimatedBackground } from "./animated-background";
+import { MinimalistBackground } from "./minimalist-background";
 
 export function ContactSection() {
   const { toast } = useToast();
@@ -54,7 +55,7 @@ export function ContactSection() {
   };
 
   return (
-    <AnimatedBackground intensity="medium" className="py-20 md:py-32 px-4 md:px-6">
+    <MinimalistBackground className="py-20 md:py-32 px-4 md:px-6">
       <div className="max-w-4xl mx-auto text-center">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-light mb-16">Get In Touch</h2>
@@ -170,6 +171,6 @@ export function ContactSection() {
           </Card>
         </ScrollReveal>
       </div>
-    </AnimatedBackground>
+  </MinimalistBackground>
   );
 }

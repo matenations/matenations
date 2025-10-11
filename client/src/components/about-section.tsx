@@ -1,9 +1,10 @@
 import { ScrollReveal } from "./scroll-reveal";
 import { AnimatedBackground } from "./animated-background";
+import { MinimalistBackground } from "./minimalist-background";
 
 export function AboutSection() {
   return (
-    <AnimatedBackground intensity="medium" className="py-20 md:py-32 px-4 md:px-6">
+    <MinimalistBackground className="py-20 md:py-32 px-4 md:px-6">
       <div className="max-w-4xl mx-auto text-center">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-12" style={{ letterSpacing: "-1px" }}>
@@ -22,6 +23,6 @@ export function AboutSection() {
           </div>
         </ScrollReveal>
       </div>
-    </AnimatedBackground>
+  </MinimalistBackground>
   );
 }

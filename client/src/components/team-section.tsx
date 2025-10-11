@@ -6,6 +6,7 @@ import prosperImage from "@assets/prosper_1757912855043.jpeg";
 import abhayImage from "@assets/Abhay_1757912854967.jpeg";
 import ceoImage from "@assets/ceo_1757912854870.jpeg";
 import { AnimatedBackground } from "./animated-background";
+import { MinimalistBackground } from "./minimalist-background";
 
 interface TeamMember {
   name: string;
@@ -177,7 +178,7 @@ function TeamCard({ member, size = "normal" }: { member: TeamMember; size?: "nor
 
 export function TeamSection() {
   return (
-    <AnimatedBackground intensity="low" className="py-20 md:py-32 px-4 md:px-6">
+    <MinimalistBackground className="py-20 md:py-32 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-light text-center mb-16 md:mb-20">Our Team</h2>
@@ -278,6 +279,6 @@ export function TeamSection() {
           </div>
         </ScrollReveal>
       </div>
-    </AnimatedBackground>
+  </MinimalistBackground>
   );
 }

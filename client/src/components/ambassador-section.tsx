@@ -3,10 +3,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import ambassadorDjImage from "@assets/ambassador_dj_1757912854805.jpeg";
 import ambassadorArtistImage from "@assets/ambassador_artist_1757912842410.jpeg";
 import { AnimatedBackground } from "./animated-background";
+import { MinimalistBackground } from "./minimalist-background";
 
 export function AmbassadorSection() {
   return (
-    <AnimatedBackground intensity="medium" className="py-20 md:py-32 px-4 md:px-6">
+    <MinimalistBackground className="py-20 md:py-32 px-4 md:px-6">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Brand Ambassadors</h2>
@@ -47,6 +48,6 @@ export function AmbassadorSection() {
           </div>
         </ScrollReveal>
       </div>
-    </AnimatedBackground>
+  </MinimalistBackground>
   );
 }
