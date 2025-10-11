@@ -11,7 +11,7 @@ export function MinimalistBackground({ children, className = "" }: MinimalistBac
     <div
       className={`relative min-h-screen w-full ${className}`}
       style={{
-        background: "linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%)",
+        background: "linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #334155 100%)",
         backgroundAttachment: "fixed"
       }}
     >
