@@ -41,12 +41,12 @@ export function TypingEffect() {
 
   return (
     <div className="relative inline-block">
-      <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400" style={{ fontFamily: "'Quicksand', 'Rounded', sans-serif", letterSpacing: '-0.02em' }}>
+      <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400" style={{ fontFamily: "'Quicksand', 'Rounded', sans-serif", letterSpacing: '-0.02em' }}>
         {displayText}
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: showCursor ? 1 : 0 }}
-          className="inline-block w-1 h-16 md:h-20 lg:h-24 bg-pink-400 ml-1"
+          className="inline-block w-1 h-10 md:h-14 lg:h-16 bg-pink-400 ml-1"
           style={{ fontFamily: "'Quicksand', 'Rounded', sans-serif" }}
         >
         </motion.span>

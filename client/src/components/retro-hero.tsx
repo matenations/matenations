@@ -30,7 +30,7 @@ export function RetroHero() {
           transition={{ duration: 1 }}
           className="mb-8"
         >
-          <div className="retro-text text-6xl md:text-8xl lg:text-9xl text-primary mb-4">
+          <div className="retro-text text-4xl md:text-6xl lg:text-7xl text-primary mb-4">
             MATE NATIONS
           </div>
           <div className="flex items-center justify-center gap-4 mb-8">

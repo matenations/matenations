@@ -74,7 +74,7 @@ export function TypingLogo() {
 
   return (
     <div 
-      className="text-6xl md:text-8xl lg:text-9xl font-bold text-center"
+      className="text-4xl md:text-6xl lg:text-7xl font-bold text-center"
       style={{ 
         fontFamily: 'Inter, sans-serif',
         fontWeight: 700,
@@ -86,7 +86,7 @@ export function TypingLogo() {
         {displayText}
       </span>
       <span 
-        className={`inline-block w-1 h-16 md:h-24 lg:h-32 bg-white ml-1 align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`}
+        className={`inline-block w-1 h-10 md:h-14 lg:h-16 bg-white ml-1 align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
           transition: 'opacity 0.1s',
           verticalAlign: 'middle',

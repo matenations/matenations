@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { TypingEffect } from "./typing-effect";
 import { useTheme } from "../contexts/theme-context";
+import { useState, useEffect } from "react";
 import cloudImage from "@assets/6705b4a36def1cf003c24d10_Property 1=Day, Property 2=Cloud 3_1760332010666.png";
 
 const particles = Array.from({ length: 15 }, (_, i) => ({
@@ -15,9 +16,61 @@ const particles = Array.from({ length: 15 }, (_, i) => ({
 export function ModernHero() {
   const { theme } = useTheme();
   const isDayTheme = theme === 'day';
+  const [showShootingStar, setShowShootingStar] = useState(false);
+  const [shootingStarKey, setShootingStarKey] = useState(0);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    const interval = setInterval(() => {
+      setShowShootingStar(true);
+      setShootingStarKey(prev => prev + 1);
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => setShowShootingStar(false), 2000);
+    }, 60000);
+
+    return () => {
+      clearInterval(interval);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, []);
+
+  const handleScrollClick = () => {
+    const container = document.getElementById('sliding-container');
+    if (container) {
+      container.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+      {/* Shooting star effect - only on desktop and night theme */}
+      <AnimatePresence>
+        {!isDayTheme && showShootingStar && (
+          <motion.div
+            key={shootingStarKey}
+            className="hidden md:block absolute top-0 left-[80%] w-1 h-1"
+            initial={{ x: 0, y: 0, opacity: 1 }}
+            animate={{ 
+              x: -400,
+              y: 400,
+              opacity: [1, 1, 0]
+            }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            style={{
+              background: 'linear-gradient(90deg, transparent, #fff)',
+              boxShadow: '0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffd700',
+              transform: 'rotate(-45deg)',
+              width: '100px',
+              height: '2px',
+            }}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Animated particles/stars - only show in night theme */}
       {!isDayTheme && particles.map((particle) => (
         <motion.div
@@ -134,10 +187,7 @@ export function ModernHero() {
         </motion.p>
 
         <motion.button
-          onClick={() => {
-            const event = new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true });
-            document.dispatchEvent(event);
-          }}
+          onClick={handleScrollClick}
           initial={{ opacity: 0, y: 20 }}
           animate={{ 
             opacity: 1, 
